@@ -1,15 +1,17 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign in & Sign up Form</title>
+  <title>Sign in</title>
 </head>
 {% block body %}
 
 <body>
+  <a href="/">Home</a>
   <!-- Login Form ************************************ -->
   <div class="container">
     <div class="forms-container">
@@ -31,61 +33,13 @@
           </div>
           {% endfor %}
           <input type="submit" name="form_type" value="Login" class="btn solid" />
-
-          <div class="social-media">
-            <a href="#" class="social-icon">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>
         </form>
 
         <!-- ************ Sign-up Form*************** -->
         <form class="sign-up-form" method="POST">
           {% csrf_token %}
-          <h2 class="title">Sign up</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            {{form.username}}
-
-          </div>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            {{form.first_name}}
-
-
-          </div>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            {{form.last_name}}
-
-          </div>
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            {{form.email}}
-
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            {{form.password1}}
-
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            {{form.password2}}
-
-          </div>
-          <div style="color: red;">
-            {{form.errors}}
-          </div>
+          <h2 class="title">Sign Up</h2>
+          {{ form|crispy }}
           <input type="submit" name="form_type" class="btn btn-primary" value="Sign up" />
 
         </form>

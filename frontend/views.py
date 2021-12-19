@@ -1,24 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .decorators import unauthenticated_user
-from django.contrib.auth.forms import UserCreationForm
+from .forms import SignupForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'frontend/home.html')
+    context = {}
+    return render(request, 'frontend/home.html',context)
 
 @unauthenticated_user
 def loginPage(request):
-    form = UserCreationForm()
+    form = SignupForm()
     if request.method == 'POST':
         if request.POST.get("form_type") == 'Sign up':
-            if request.method == 'POST' :
-                form = UserCreationForm(request.POST)
-                if form.is_valid():
-                    user = form.save()
-                    user.save()
-                    messages.success(request, 'Account created for '+ user.username)
-                    return redirect('login')
-                    
+            form = SignupForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Account created for '+ request.POST['username'])
+                return redirect('login')
 
         elif request.POST.get("form_type") == 'Login':
             username = request.POST.get('username')
@@ -38,3 +40,6 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+# @login_required(login_url='login')

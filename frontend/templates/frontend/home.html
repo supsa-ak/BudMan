@@ -7,6 +7,9 @@
     <title>BudMan - BudMan is a web app that helps you track and adjust your spending so that you are in control of money.</title></head>
 <body>
     <h1>BudMan - BudMan is a web app that helps you track and adjust your spending so that you are in control of money.</h1>
+    {% if user.is_authenticated %}   
+    <h2>Logged in as </h2><h2 style="color: green">{{request.user}}</h2>
+    {% endif %}
     <a href="/login">Login</a>
     <a href="/logout">Logout</a>
 </body>
