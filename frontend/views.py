@@ -5,11 +5,10 @@ from .forms import SignupForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 def home(request):
     context = {}
-    return render(request, 'frontend/home.html',context)
+    return render(request, 'home.html',context)
 
 @unauthenticated_user
 def loginPage(request):
@@ -35,11 +34,8 @@ def loginPage(request):
                 messages.info(request, 'Username OR password is incorrect')
 
     context = {'form':form}
-    return render (request, 'accounts/login.html', context)
+    return render (request, 'login.html', context)
 
 def logoutUser(request):
     logout(request)
     return redirect('login')
-
-
-# @login_required(login_url='login')
