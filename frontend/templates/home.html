@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -26,7 +25,6 @@
     <h1>Spendings</h1>
 
     <div class="container">
-
         <button class="btn btn-primary " type="button" data-mdb-toggle="dropdown" aria-expanded="false" id="new"
             onclick=toggleButtonNew()>
             New
@@ -34,17 +32,14 @@
         <div class="container">
             <form class="px-4 py-3" id="newForm" style="display:none; width: 620px;">
                 <h5 class="primary">Add New Spending</h5>
-                <!-- Text input -->
                 <div class="form-outline mb-4">
                     <input type="text" id="form6Example3" class="form-control" />
                     <label class="form-label" for="form6Example3">Name</label>
                 </div>
-                <!-- Number input -->
                 <div class="form-outline mb-4">
                     <input type="number" id="form6Example6" class="form-control" />
                     <label class="form-label" for="form6Example6">Amount</label>
                 </div>
-
                 <select class="form-select" aria-label="Default select example">
                     <option disabled selected>Categories</option>
                     <option value="1">One</option>
@@ -56,8 +51,6 @@
                     <textarea class="form-control" id="form4Example3" rows="4"></textarea>
                     <label class="form-label" for="form4Example3">Note</label>
                 </div>
-
-                <!-- Submit button -->
                 <br>
                 <button type="submit" onclick="toggleButtonNewForm()"
                     class="btn btn-primary btn-block mb-4">Create</button>
@@ -65,10 +58,9 @@
                     <i class="fas fa-times"></i>
                 </button>
             </form>
-
         </div>
     </div>
-    <table class="table align-middle">
+    <table class="table align-middle" id="spending">
         <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -81,19 +73,27 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">Purchase 1</th>
-                <td>Sit</td>
-                <td>Amet</td>
-                <td>Amet</td>
-                <td>Amet</td>
-                <td>
-                    <button type="button" class="btn btn-success btn-sm px-3">
+            <tr id="spendingRow">
+                <td scope="row" id="input1">Purchase 1</td>
+                <td>12 feb 2021 14:32</td>
+                <td id="input2">500&#8377;</td>
+                <td id="input3">Investment</td>
+                <td id="input4">Long time no see</td>
+                <td id="buttons">
+                    <button type="button" onclick="edit()" id="edit" style="display: inline;"
+                        class="btn btn-success btn-sm px-3">
                         <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" id="save" style="display: none;" class="btn btn-primary btn-sm px-3">
+                        Save
+                    </button>
+                    <button type="button" onclick="close1()" style="display: none;" id="cut"
+                        class="btn btn-warning btn-sm px-3">
+                        <i class="fas fa-times"></i>
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm px-3">
+                    <button type="button" id="delete" class="btn btn-danger btn-sm px-3">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
@@ -101,8 +101,6 @@
 
         </tbody>
     </table>
-
-
     {% else %}
     <h1>BudMan - BudMan is a web app that helps you track and adjust your spending so that you are in control of money.
     </h1>
@@ -111,7 +109,7 @@
     <!-- stuff realted to promotion of website -->
 
     {% endif %}
-   
+
 
     <script>
         function getCookie(name) {
@@ -155,6 +153,73 @@
             document.getElementById('new').style.display = "block";
             document.getElementById('newForm').style.display = "none";
         }
+
+        function edit() {
+            document.getElementById('edit').style.display = "none";
+            document.getElementById('save').style.display = "inline";
+            document.getElementById('cut').style.display = "inline";
+            document.getElementById('delete').style.display = "none";
+        }
+        function close1() {
+            document.getElementById('edit').style.display = "inline";
+            document.getElementById('save').style.display = "none";
+            document.getElementById('cut').style.display = "none";
+            document.getElementById('delete').style.display = "inline";
+        }
+
+        document.getElementById('spending').addEventListener('click', () => {
+            if (event.target.tagName === 'BUTTON') {
+                if (event.srcElement.id === 'edit') {
+                    var row = document.getElementById('spendingRow');
+                    var span0 = row.getElementsByTagName('td')[0];
+                    var td = document.createElement('td');
+                    var input0 = document.createElement('input');
+                    input0.type = 'text';
+                    input0.value = span0.textContent;
+                    input0.className = 'form-control';
+                    td.appendChild(input0)
+                    row.insertBefore(td, span0);
+                    row.removeChild(span0);
+                }
+                if (event.srcElement.id === 'edit') {
+                    
+                    var row = document.getElementById('spendingRow');
+                    var span0 = row.getElementsByTagName('td')[2];
+                    var td = document.createElement('td');
+                    var input0 = document.createElement('input');
+                    input0.type = 'text';
+                    input0.value = span0.textContent;
+                    input0.className = 'form-control';
+                    td.appendChild(input0)
+                    row.insertBefore(td, span0);
+                    row.removeChild(span0);
+
+                 
+                    var row = document.getElementById('spendingRow');
+                    var span0 = row.getElementsByTagName('td')[3];
+                    var td = document.createElement('td');
+                    var input0 = document.createElement('input');
+                    input0.type = 'text';
+                    input0.value = span0.textContent;
+                    input0.className = 'form-control';
+                    td.appendChild(input0)
+                    row.insertBefore(td, span0);
+                    row.removeChild(span0);
+                 
+                    var row = document.getElementById('spendingRow');
+                    var span0 = row.getElementsByTagName('td')[4];
+                    var td = document.createElement('td');
+                    var input0 = document.createElement('input');
+                    input0.type = 'text';
+                    input0.value = span0.textContent;
+                    input0.className = 'form-control';
+                    td.appendChild(input0)
+                    row.insertBefore(td, span0);
+                    row.removeChild(span0);
+                }
+            }
+        });
+           
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
 </body>
