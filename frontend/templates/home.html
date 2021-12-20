@@ -15,6 +15,115 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+
+    <style>
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        /* Float cancel and delete buttons and add an equal width */
+        .cancelbtn,
+        .deletebtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add a color to the cancel button */
+        .cancelbtn {
+            background-color: #ccc;
+            color: black;
+        }
+
+        /* Add a color to the delete button */
+        .deletebtn {
+            background-color: #f44336;
+        }
+
+        /* Add padding and center-align text to the container */
+        .container {
+            padding: 16px;
+            text-align: center;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: #474e5d;
+            padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* The Modal Close Button (x) */
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and delete button on extra small screens */
+        @media screen and (max-width: 300px) {
+
+            .cancelbtn,
+            .deletebtn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,34 +135,38 @@
 
     <div class="container">
         <button class="btn btn-primary " type="button" data-mdb-toggle="dropdown" aria-expanded="false" id="new"
-            onclick=toggleButtonNew()>
+            onclick=toggleButtonNew() style="width: 80px;">
             New
         </button>
         <div class="container">
-            <form class="px-4 py-3" id="newForm" style="display:none; width: 620px;">
+            <form class="px-4 py-3" id="newForm" style="display:none;">
                 <h5 class="primary">Add New Spending</h5>
                 <div class="form-outline mb-4">
-                    <input type="text" id="form6Example3" class="form-control" />
+                    <input type="text" id="newName" class="form-control" />
                     <label class="form-label" for="form6Example3">Name</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="number" id="form6Example6" class="form-control" />
+                    <input type="number" id="newAmount" class="form-control" />
                     <label class="form-label" for="form6Example6">Amount</label>
                 </div>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" id="newCategory" aria-label="Default select example">
                     <option disabled selected>Categories</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Fees">Fees</option>
+                    <option value="Other">Other</option>
                 </select>
                 <br>
                 <div class="form-outline mb-4">
-                    <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                    <textarea class="form-control" id="newNote" rows="4"></textarea>
                     <label class="form-label" for="form4Example3">Note</label>
                 </div>
                 <br>
-                <button type="submit" onclick="toggleButtonNewForm()"
-                    class="btn btn-primary btn-block mb-4">Create</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4"
+                    onclick="createTransaction()">Create</button>
                 <button type="button" onclick="toggleButtonNewForm()" class="btn btn-danger btn-sm px-3">
                     <i class="fas fa-times"></i>
                 </button>
@@ -65,42 +178,32 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Created</th>
-                <th scope="col">Amount</th>
+                <th scope="col">Amount &#8377;</th>
                 <th scope="col">category</th>
                 <th scope="col">Note</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
-            <tr id="spendingRow">
-                <td scope="row" id="input1">Purchase 1</td>
-                <td>12 feb 2021 14:32</td>
-                <td id="input2">500&#8377;</td>
-                <td id="input3">Investment</td>
-                <td id="input4">Long time no see</td>
-                <td id="buttons">
-                    <button type="button" onclick="edit()" id="edit" style="display: inline;"
-                        class="btn btn-success btn-sm px-3">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button type="button" id="save" style="display: none;" class="btn btn-primary btn-sm px-3">
-                        Save
-                    </button>
-                    <button type="button" onclick="close1()" style="display: none;" id="cut"
-                        class="btn btn-warning btn-sm px-3">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </td>
-                <td>
-                    <button type="button" id="delete" class="btn btn-danger btn-sm px-3">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-
+        <tbody id="tablebody">
         </tbody>
     </table>
+
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content">
+            <div class="container">
+                <h1>Delete Spending</h1>
+                <p>Are you sure you want to delete Spending?</p>
+
+                <div class="clearfix" id="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                    <button type="button" class="deletebtn" id="deleteConfirm">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
     {% else %}
     <h1>BudMan - BudMan is a web app that helps you track and adjust your spending so that you are in control of money.
     </h1>
@@ -127,24 +230,51 @@
             return cookieValue;
         }
         var csrftoken = getCookie('csrftoken');
-        function updateTransaction() {
-            fetch("api/update-transaction", {
+
+        function createTransaction() {
+            var input_name = document.getElementById('newName').value
+            var input_amount = document.getElementById('newAmount').value
+            var input_category = document.getElementById('newCategory').value
+            var input_note = document.getElementById('newNote').value
+            console.log(input_name);
+
+            fetch("api/create-transaction", {
                 method: "POST",
                 body: JSON.stringify({
-                    id: 1,
-                    name: "one",
-                    amount: 888,
-                    category: "fee",
-                    note: "lkjal;ksdf"
+                    name: input_name,
+                    amount: input_amount,
+                    category: input_category,
+                    note: input_note
                 }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
                     'X-CSRFToken': csrftoken
                 }
-            })
-                .then(response => response.json())
+            });
         }
+        function updateTransaction(id) {
+            var input_id = id
+            var input_name = document.getElementById('input1' + id).value
+            var input_amount = document.getElementById('input2' + id).value
+            var input_category = document.getElementById('input3' + id).value
+            var input_note = document.getElementById('input4' + id).value
 
+            fetch("api/update-transaction", {
+                method: "POST",
+                body: JSON.stringify({
+                    id: input_id,
+                    name: input_name,
+                    amount: input_amount,
+                    category: input_category,
+                    note: input_note
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'X-CSRFToken': csrftoken
+                }
+            });
+            close1(id);
+        }
         function toggleButtonNew() {
             document.getElementById('new').style.display = "none";
             document.getElementById('newForm').style.display = "block";
@@ -154,73 +284,185 @@
             document.getElementById('newForm').style.display = "none";
         }
 
-        function edit() {
-            document.getElementById('edit').style.display = "none";
-            document.getElementById('save').style.display = "inline";
-            document.getElementById('cut').style.display = "inline";
-            document.getElementById('delete').style.display = "none";
+        function edit(id) {
+            document.getElementById('edit' + id).style.display = "none";
+            document.getElementById('save' + id).style.display = "inline";
+            document.getElementById('cut' + id).style.display = "inline";
+            document.getElementById('delete' + id).style.display = "none";
+
+
+            var row = document.getElementById('spendingRow' + id);
+            var span0 = document.getElementById('input1' + id)
+            var td = document.createElement('td');
+            var input0 = document.createElement('input');
+            input0.type = 'text';
+            input0.value = span0.textContent;
+            input0.className = 'form-control';
+            input0.id = 'input1' + id
+            td.appendChild(input0)
+            row.insertBefore(td, span0);
+            row.removeChild(span0);
+
+            var span0 = document.getElementById('input2' + id)
+            var td = document.createElement('td');
+            var input0 = document.createElement('input');
+            input0.type = 'text';
+            input0.value = span0.textContent;
+            input0.className = 'form-control';
+            input0.id = 'input2' + id
+            td.appendChild(input0)
+            row.insertBefore(td, span0);
+            row.removeChild(span0);
+
+            var span0 = document.getElementById('input3' + id)
+            var td = document.createElement('td');
+            var input0 = document.createElement('select');
+            input0.className = 'form-control';
+            input0.id = 'input3' + id
+
+            var option = document.createElement('option')
+            option.value = 'Rent'
+            option.innerText = 'Rent'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Travel'
+            option.innerText = 'Travel'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Investment'
+            option.innerText = 'Investment'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Shopping'
+            option.innerText = 'Shopping'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Learning'
+            option.innerText = 'Learning'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Fees'
+            option.innerText = 'Fees'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            var option = document.createElement('option')
+            option.value = 'Other'
+            option.innerText = 'Other'
+            if (option.value === span0.textContent) {
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+            }
+            input0.appendChild(option);
+
+            td.appendChild(input0);
+            row.insertBefore(td, span0);
+            row.removeChild(span0);
+
+            var span0 = document.getElementById('input4' + id)
+            var td = document.createElement('td');
+            var input0 = document.createElement('input');
+            input0.type = 'text';
+            input0.value = span0.textContent;
+            input0.className = 'form-control';
+            input0.id = 'input4' + id
+            td.appendChild(input0)
+            row.insertBefore(td, span0);
+            row.removeChild(span0);
         }
-        function close1() {
-            document.getElementById('edit').style.display = "inline";
-            document.getElementById('save').style.display = "none";
-            document.getElementById('cut').style.display = "none";
-            document.getElementById('delete').style.display = "inline";
+        function close1(id) {
+            document.getElementById('edit' + id).style.display = "inline";
+            document.getElementById('save' + id).style.display = "none";
+            document.getElementById('cut' + id).style.display = "none";
+            document.getElementById('delete' + id).style.display = "inline";
             location.reload();
         }
-
-        document.getElementById('spending').addEventListener('click', () => {
-            if (event.target.tagName === 'BUTTON') {
-                if (event.srcElement.id === 'edit') {
-                    var row = document.getElementById('spendingRow');
-                    var span0 = row.getElementsByTagName('td')[0];
-                    var td = document.createElement('td');
-                    var input0 = document.createElement('input');
-                    input0.type = 'text';
-                    input0.value = span0.textContent;
-                    input0.className = 'form-control';
-                    td.appendChild(input0)
-                    row.insertBefore(td, span0);
-                    row.removeChild(span0);
+        function confirmDelete(id) {
+            document.getElementById('id01').style.display = 'block';
+            document.getElementById("clearfix").addEventListener("click", () => {
+                if (event.target.tagName === 'BUTTON') {
+                    if (event.srcElement.id === 'deleteConfirm') {
+                        deleteTransaction(id);
+                    }
                 }
-                if (event.srcElement.id === 'edit') {
-                    
-                    var row = document.getElementById('spendingRow');
-                    var span0 = row.getElementsByTagName('td')[2];
-                    var td = document.createElement('td');
-                    var input0 = document.createElement('input');
-                    input0.type = 'text';
-                    input0.value = span0.textContent;
-                    input0.className = 'form-control';
-                    td.appendChild(input0)
-                    row.insertBefore(td, span0);
-                    row.removeChild(span0);
-
-                 
-                    var row = document.getElementById('spendingRow');
-                    var span0 = row.getElementsByTagName('td')[3];
-                    var td = document.createElement('td');
-                    var input0 = document.createElement('input');
-                    input0.type = 'text';
-                    input0.value = span0.textContent;
-                    input0.className = 'form-control';
-                    td.appendChild(input0)
-                    row.insertBefore(td, span0);
-                    row.removeChild(span0);
-                 
-                    var row = document.getElementById('spendingRow');
-                    var span0 = row.getElementsByTagName('td')[4];
-                    var td = document.createElement('td');
-                    var input0 = document.createElement('input');
-                    input0.type = 'text';
-                    input0.value = span0.textContent;
-                    input0.className = 'form-control';
-                    td.appendChild(input0)
-                    row.insertBefore(td, span0);
-                    row.removeChild(span0);
+            });
+        }
+        function deleteTransaction(id) {
+            fetch("api/delete-transaction", {
+                method: "POST",
+                body: JSON.stringify({
+                    id: id,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'X-CSRFToken': csrftoken
                 }
-            }
-        });
-           
+            });
+            close1(id);
+        }
+        fetch('/api')
+            .then((response) => (response.json()))
+            .then((data) => {
+                // console.log(JSON.stringify(data));
+
+                var h = document.getElementById("tablebody");
+                for (let i = 0; i < data['data'].length; i++) {
+                    h.insertAdjacentHTML("afterbegin", `<tr id="spendingRow${data['data'][i]['id']}">
+                        <td scope="row" id="input1${data['data'][i]['id']}">${data['data'][i]['name']}</td>
+                        <td>${data['data'][i]['created']}</td>
+                        <td id="input2${data['data'][i]['id']}">${data['data'][i]['amount']}</td>
+                        <td id="input3${data['data'][i]['id']}">${data['data'][i]['category']}</td>
+                        <td id="input4${data['data'][i]['id']}">${data['data'][i]['note']}</td>
+                        <td id="buttons">
+                            <button type="button" onclick="edit(${data['data'][i]['id']})" id="edit${data['data'][i]['id']}" style="display: inline;"
+                                class="btn btn-success btn-sm px-3">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" id="save${data['data'][i]['id']}" onclick="updateTransaction(${data['data'][i]['id']})" style="display: none;" class="btn btn-primary btn-sm px-3">
+                                Save
+                            </button>
+                            <button type="button" onclick="close1(${data['data'][i]['id']})" style="display: none;" id="cut${data['data'][i]['id']}"
+                                class="btn btn-warning btn-sm px-3">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" id="delete${data['data'][i]['id']}" onclick="confirmDelete(${data['data'][i]['id']})" class="btn btn-danger btn-sm px-3">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+            `);
+                }
+            });        
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
 </body>

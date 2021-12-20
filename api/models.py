@@ -8,15 +8,15 @@ class Transaction(models.Model):
     name = models.CharField(max_length=500)
     amount = models.IntegerField()
     categories = [
-        ('ren', 'Rent'),
-        ('tra', 'Travel'),
-        ('inv', 'Investment'),
-        ('sho', 'Shopping'),
-        ('lea', 'Learning'),
-        ('fee', 'Fees'),
-        ('oth', 'Other'),
+        ('Rent', 'Rent'),
+        ('Travel', 'Travel'),
+        ('Investment', 'Investment'),
+        ('Shopping', 'Shopping'),
+        ('Learning', 'Learning'),
+        ('Fees', 'Fees'),
+        ('Other', 'Other'),
     ]
-    category = models.CharField(max_length=3, default='oth', choices=categories)
+    category = models.CharField(max_length=10, default='oth', choices=categories)
     note = models.TextField()
 
     def __str__(self):
