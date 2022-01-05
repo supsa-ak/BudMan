@@ -14,14 +14,7 @@ def home(request):
 def loginPage(request):
     form = SignupForm()
     if request.method == 'POST':
-        if request.POST.get("form_type") == 'Sign up':
-            form = SignupForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Account created for '+ request.POST['username'])
-                return redirect('login')
-
-        elif request.POST.get("form_type") == 'Login':
+        if request.POST.get("form_type") == 'Login':
             username = request.POST.get('username')
             password = request.POST.get('password')
            
@@ -36,6 +29,20 @@ def loginPage(request):
     context = {'form':form}
     return render (request, 'login.html', context)
 
+
+@unauthenticated_user
+def signupPage(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        if request.POST.get("form_type") == 'Sign up':
+            form = SignupForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Account created for '+ request.POST['username'])
+                return redirect('login')
+    context = {'form':form}
+    return render (request, 'signup.html', context)
+
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')

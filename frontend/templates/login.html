@@ -6,7 +6,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign in</title>
+  <title>Sign in - BudMan</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="stylesheet" href="{% static 'frontend/css/login.css' %}">
 </head>
 
 <body>
@@ -15,36 +18,30 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form class="sign-in-form" method="POST">
-          {% csrf_token %}
-          <h2 class="title">Sign in</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" name="username" />
+        <div class="wrapper">
+          <div class="logo"> <img src="{% static 'frontend/img/white.png' %}" alt="logo">
           </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="password" />
-          </div>
-          {% for message in messages %}
-          <div style="color: red;">
-            <p>{{message}}</p>
-          </div>
-          {% endfor %}
-          <input type="submit" name="form_type" value="Login" class="btn solid" />
-        </form>
-
-        <!-- ************ Sign-up Form*************** -->
-        <form class="sign-up-form" method="POST">
-          {% csrf_token %}
-          <h2 class="title">Sign Up</h2>
-          {{ form|crispy }}
-          <input type="submit" name="form_type" class="btn btn-primary" value="Sign up" />
-
-        </form>
+          <div class="text-center mt-4 name"> BudMan </div>
+          <form class="p-3 mt-3" method="POST">
+            {% csrf_token %}
+            <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span>
+              <input type="text" placeholder="Username" name="username" />
+            </div>
+            <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span>
+              <input type="password" placeholder="Password" name="password" />
+            </div>
+            {% for message in messages %}
+            <div style="color: red;" class="d-flex align-items-center">
+              <p>{{message}}</p>
+            </div>
+            {% endfor %}
+            <input type="submit" name="form_type" value="Login" class="btn solid mt-3" />
+          </form>
+          <div class="text-center fs-6"><a href="/signup">Sign up</a> </div>      
+        </div>
       </div>
     </div>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
