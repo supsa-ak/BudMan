@@ -10,18 +10,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
   <link rel="stylesheet" href="{% static 'frontend/css/login.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'frontend/img/black.png' %}" />
 </head>
 
 <body>
-  <a href="/">Home</a>
   <!-- Login Form ************************************ -->
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
         <div class="wrapper">
-          <div class="logo"> <img src="{% static 'frontend/img/white.png' %}" alt="logo">
+          <a href="/"><div class="logo"> <img src="{% static 'frontend/img/white.png' %}" alt="logo">
           </div>
-          <div class="text-center mt-4 name"> BudMan </div>
+          <div class="text-center mt-4 name"> BudMan </div></a>
           <form class="p-3 mt-3" method="POST">
             {% csrf_token %}
             <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span>
