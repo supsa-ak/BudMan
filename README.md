@@ -230,5 +230,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ```
-![Logo](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/hwhite.png)
-
+![Logo](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/logoreadme.png)
