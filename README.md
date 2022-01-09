@@ -8,8 +8,8 @@ BudMan is a web app that helps you track and adjust your spending so that you ar
 
 ## Screenshots
 
-![Screenshot 1](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/screenshot1.png)
-![Screenshot 2](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/screenshot2.png)
+![Screenshot 1](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/Screenshot1.png)
+![Screenshot 2](https://raw.githubusercontent.com/supsa-ak/BudMan/main/static/frontend/img/Screenshot2.png)
 
 
 # Built With
