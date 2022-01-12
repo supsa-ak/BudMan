@@ -69,23 +69,23 @@ WSGI_APPLICATION = 'BudMan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'BudMan',
-        'ENFORCE_SCHEMA': True,
-        'CLIENT': {
-            'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
-        }   
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'BudMan',
+#         'ENFORCE_SCHEMA': True,
+#         'CLIENT': {
+#             'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
+#         }   
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
