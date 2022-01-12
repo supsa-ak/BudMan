@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*(#x82u)6i))!q(zfv=*v3+0=9&en+51(1i37rc=_0@6&-+&w7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
 ALLOWED_HOSTS = ['127.0.0.1', 'budman.azurewebsites.net']
 
@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'BudMan',
-        'ENFORCE_SCHEMA': False,
+        'ENFORCE_SCHEMA': True,
         'CLIENT': {
             'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
         }   
