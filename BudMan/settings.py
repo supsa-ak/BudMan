@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'BudMan',
-        'ENFORCE_SCHEMA': True,
+        'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
         }   
