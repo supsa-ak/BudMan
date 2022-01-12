@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*(#x82u)6i))!q(zfv=*v3+0=9&en+51(1i37rc=_0@6&-+&w7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True 
 
 ALLOWED_HOSTS = ['127.0.0.1', 'budman.azurewebsites.net']
 
@@ -69,23 +69,23 @@ WSGI_APPLICATION = 'BudMan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'BudMan',
-#         'ENFORCE_SCHEMA': True,
-#         'CLIENT': {
-#             'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
-#         }   
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'BudMan',
+        'ENFORCE_SCHEMA': True,
+        'CLIENT': {
+            'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
+        }   
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
