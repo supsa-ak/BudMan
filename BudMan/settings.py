@@ -76,16 +76,16 @@ WSGI_APPLICATION = 'BudMan.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'BudMan',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
-        }   
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'BudMan',
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': "mongodb+srv://sak:ShitIsMongo@cluster0.cot2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",       
+#         }   
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
